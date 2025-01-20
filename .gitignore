@@ -1,0 +1,34 @@
+# Node modules
+/node_modules/
+
+# Environment files
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor files
+.vscode/
+.idea/
+
+# Coverage output
+coverage/
+
+# Build output
+/dist/
+/build/
+
+# Package lock file (optional)
+package-lock.json
+yarn.lock
+
+# Other files you may want to ignore
+*.tgz
+*.bak
+*.swp
