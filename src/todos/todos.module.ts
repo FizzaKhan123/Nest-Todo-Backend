@@ -1,14 +1,17 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { forwardRef, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm'; // Import TypeOrmModule
 import { TodosController } from './todos.controller';
 import { TodosService } from './todos.service';
-import { TaskSchema } from './todos.schema';
+import { Task } from './todos.entity'; // Import Task Entity
+import { User } from '../auth/user.entity';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Task', schema: TaskSchema }]),
+    TypeOrmModule.forFeature([Task]), 
+     forwardRef(() => User)
   ],
   controllers: [TodosController],
   providers: [TodosService],
+  exports: [TypeOrmModule],
 })
 export class TodosModule {}

@@ -6,13 +6,17 @@
     "@nestjs/mongoose": "^11.0.0",
     "@nestjs/platform-express": "^11.0.3",
     "@nestjs/swagger": "^11.0.2",
+    "@nestjs/typeorm": "^11.0.0",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.14.1",
     "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "nodemon": "^3.1.9",
+    "pg": "^8.13.1",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",

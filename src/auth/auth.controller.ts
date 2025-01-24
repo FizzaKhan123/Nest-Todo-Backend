@@ -2,6 +2,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {CreateUserDto} from '../dto/CreateUserDto'
 
 @Controller('auth')
 export class AuthController {
@@ -10,11 +11,17 @@ export class AuthController {
   @Post('register')
   @ApiOperation({ summary: 'Register a new user and get JWT token' })
   @ApiResponse({ status: 201, type: Object })
-  async register(
-    @Body() body: { username: string; email: string; password: string },
-  ): Promise<any> {
-    return this.authService.register(body.username, body.email, body.password);
+  // async register(
+  //   @Body() body: { username: string; email: string; password: string },
+  // ): Promise<any> {
+  //   return this.authService.register(body.username, body.email, body.password);
+  // }
+
+  async register(@Body() registerDto: CreateUserDto): Promise<any> {
+    const { username, email, password } = registerDto;
+    return this.authService.register(username, email, password);
   }
+   
 
   @Post('login')
   @ApiOperation({ summary: 'Login a user and get JWT token' })
