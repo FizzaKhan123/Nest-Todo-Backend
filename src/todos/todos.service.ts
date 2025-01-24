@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 export class TodosService {
   constructor(
     @InjectRepository(Task) private taskRepository: Repository<Task>, // Inject TypeORM repository
-    private jwtService: JwtService,
+    // private jwtService: JwtService,
   ) {}
 
   // Create a new task
