@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { User } from '../auth/user.entity'; 
+import { User } from './user.entity'; 
 
 @Entity()
 export class Task {
@@ -11,6 +11,9 @@ export class Task {
 
   @Column({ type: 'text' })
   description: string; 
+  
+  @Column({ type: 'text' })
+  explanation: string; 
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;  // Task creation timestamp

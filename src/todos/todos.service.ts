@@ -1,15 +1,14 @@
-// src/todos/todos.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Task } from './todos.entity';
-import { JwtService } from '@nestjs/jwt';
+import { Task } from '../entities/todos.entity';
+import { UpdateTaskDto } from '../dto/task/UpdateDto';
 
 @Injectable()
 export class TodosService {
   constructor(
-    @InjectRepository(Task) private taskRepository: Repository<Task>, // Inject TypeORM repository
-    // private jwtService: JwtService,
+    @InjectRepository(Task) private taskRepository: Repository<Task>, 
+ 
   ) {}
 
   // Create a new task
@@ -17,22 +16,21 @@ export class TodosService {
     const task = this.taskRepository.create({
       title,
       description,
-      createdBy: user.sub, // Set createdBy as the user ID (sub from JWT)
+      createdBy: user.sub, 
     });
 
-    console.log("new task ", task);
-    return await this.taskRepository.save(task); // Save the new task
+    return await this.taskRepository.save(task); 
   }
 
-  // Get all tasks created by the user
+  
   async findAll(user: any): Promise<Task[]> {
     return await this.taskRepository.find({ where: { createdBy: user.sub } }); // Use the where condition to filter tasks by user
   }
 
-  // Get a task by ID
+  
   async findOne(id: number, user: any): Promise<Task> {
     const task = await this.taskRepository.findOne({
-      where: { id, createdBy: user.sub }, // Ensure the task belongs to the user
+      where: { id, createdBy: user.sub }, 
     });
 
     if (!task) {
@@ -42,7 +40,6 @@ export class TodosService {
     return task;
   }
 
-  // Update a task
   async update(id: number, title: string, description: string, user: any): Promise<Task> {
     const task = await this.taskRepository.findOne({ where: { id, createdBy: user.sub } });
 
@@ -56,6 +53,27 @@ export class TodosService {
 
     return await this.taskRepository.save(task); // Update the task and save it
   }
+
+
+  async partialUpdate(id: number, updateTaskDto: UpdateTaskDto, user: any): Promise<Task> {
+    // Find the task by ID and user
+    const task = await this.taskRepository.findOne({ where: { id, createdBy: user.sub } });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+
+    // Update only the fields that are provided in the DTO (partial update)
+    if (updateTaskDto.title) {
+      task.title = updateTaskDto.title;
+    }
+    if (updateTaskDto.description) {
+      task.description = updateTaskDto.description;
+    }
+
+    // Save the updated task
+    return this.taskRepository.save(task);
+  }
+
 
   // Delete a task
   async remove(id: number, user: any): Promise<{ message: string }> {
