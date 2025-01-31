@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Task } from '../entities/todos.entity';
+import { Task } from '../database/entities/todos.entity';
 import { UpdateTaskDto } from '../dto/task/UpdateDto';
 
 @Injectable()

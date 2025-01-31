@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, Req, UseGuards, Patch } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';  // Import the custom guard
 import { TodosService } from './todos.service';
-import { Task } from '../entities/todos.entity'; // Task entity for TypeORM
+import { Task } from '../database/entities/todos.entity'; // Task entity for TypeORM
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { InjectRepository } from '@nestjs/typeorm'; // Import InjectRepository
 import { Repository } from 'typeorm'; // Import Repository from TypeORM

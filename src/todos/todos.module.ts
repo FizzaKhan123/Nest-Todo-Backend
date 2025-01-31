@@ -2,8 +2,8 @@ import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { TodosController } from './todos.controller';
 import { TodosService } from './todos.service';
-import { Task } from '../entities/todos.entity'; 
-import { User } from '../entities/user.entity';
+import { Task } from '../database/entities/todos.entity'; 
+import { User } from '../database/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
